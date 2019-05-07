@@ -1,6 +1,6 @@
 <meta charset="{{ config('app.charset', 'utf-8') }}"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <meta name="csrf-token" content="{{ csrf_token() }}"/>
 <link rel="icon" href="{{ asset('/favicon.ico') }}" sizes="16x16"/>
@@ -14,7 +14,8 @@
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 
-<title>{{ $page_title or config('app.name') }}</title>
+@yield('custom_style')
 
+<title>{{ $page_title or config('app.name') }}</title>
 @section('html_header')
 @show
