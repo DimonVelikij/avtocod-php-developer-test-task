@@ -25,6 +25,9 @@ Route::get('/auth', function () {
     return view('auth');
 })->name('auth');
 
+Route::post('/logout', 'Auth\LoginController@logout')
+    ->name('logout');
+
 Route::get('/register', 'Auth\RegisterController@showRegistrationForm')
     ->name('register');
 

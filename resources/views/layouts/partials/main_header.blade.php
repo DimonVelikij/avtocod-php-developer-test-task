@@ -13,8 +13,11 @@
         @if(Auth::check())
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-text"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }}</li>
-                <li><a href="{{ Auth::logout() }}"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
+                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('form-logout').submit();"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
             </ul>
+            <form id="form-logout" action="{{ route('logout') }}" method="POST" style="display: none">
+                {{ csrf_field() }}
+            </form>
         @endif
     </div>
 </nav>
