@@ -21,9 +21,9 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-Route::get('/auth', function () {
+Route::get('/login', function () {
     return view('auth');
-})->name('auth');
+})->name('login');
 
 Route::post('/logout', 'Auth\LoginController@logout')
     ->name('logout');
@@ -34,6 +34,6 @@ Route::get('/register', 'Auth\RegisterController@showRegistrationForm')
 Route::post('/register-submit', 'Auth\RegisterController@register')
     ->name('register-submit');
 
-Route::get('/reg_success', function () {
-    return view('reg_success');
-})->name('reg_success');
+Route::get('/register-success', function () {
+    return view('auth.register-success');
+})->name('register-success');

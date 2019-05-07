@@ -14,7 +14,7 @@ class RegisterControllerTest extends AbstractTestCase
      */
     public function testShowRegistrationForm()
     {
-        $response = $this->get('/register');
+        $response = $this->get(route('register'));
 
         $response->assertSuccessful();
         $response->assertViewIs('auth.register');
@@ -27,7 +27,7 @@ class RegisterControllerTest extends AbstractTestCase
     {
         $user = factory(User::class)->make();
 
-        $response = $this->actingAs($user)->get('/register');
+        $response = $this->actingAs($user)->get(route('register'));
 
         $response->assertRedirect();
     }
@@ -65,13 +65,10 @@ class RegisterControllerTest extends AbstractTestCase
             'password_confirmation' =>  '123qweASD'
         ]);
 
-        $response->assertRedirect();
+        $response->assertRedirect(route('register-success'));
         $this->assertDatabaseHas('users', [
             'email' =>  'username@mail.ru'
         ]);
         $response->assertSessionMissing('errors');
-
-        $user = User::where('email', 'username@mail.ru')->first();
-        $this->assertAuthenticatedAs($user);
     }
 }
