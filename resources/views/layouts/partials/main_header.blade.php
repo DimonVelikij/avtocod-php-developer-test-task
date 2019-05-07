@@ -13,7 +13,7 @@
         @if(Auth::check())
             <ul class="nav navbar-nav navbar-right">
                 <li class="navbar-text"><span class="glyphicon glyphicon-user"></span> {{ Auth::user()->name }}</li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
+                <li><a href="{{ Auth::logout() }}"><span class="glyphicon glyphicon-log-out"></span> Выход</a></li>
             </ul>
         @endif
     </div>
