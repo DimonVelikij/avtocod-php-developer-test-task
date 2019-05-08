@@ -13,13 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::get('/', 'Messenger\MessageController@listMessages')
+    ->name('home');
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::get('/home', 'Messenger\MessageController@listMessages')
+    ->name('home');
 
 Route::get('/login', 'Auth\LoginController@showLoginForm')
     ->name('login');
