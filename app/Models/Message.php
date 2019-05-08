@@ -30,6 +30,16 @@ class Message extends Model
     protected $primaryKey = 'id';
 
     /**
+     * Атрибуты, которые можно присваивать
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'text',
+        'user_id'
+    ];
+
+    /**
      * Определение связи с таблицей пользователей (users)
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

@@ -19,6 +19,9 @@ Route::get('/', 'Messenger\MessageController@listMessages')
 Route::get('/home', 'Messenger\MessageController@listMessages')
     ->name('home');
 
+Route::post('/add-message', 'Messenger\MessageController@addMessage')
+    ->name('add-message');
+
 Route::get('/login', 'Auth\LoginController@showLoginForm')
     ->name('login');
 
