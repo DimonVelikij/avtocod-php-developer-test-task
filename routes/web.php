@@ -21,9 +21,11 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
-Route::get('/login', function () {
-    return view('auth');
-})->name('login');
+Route::get('/login', 'Auth\LoginController@showLoginForm')
+    ->name('login');
+
+Route::post('/login-submit', 'Auth\LoginController@login')
+    ->name('login-submit');
 
 Route::post('/logout', 'Auth\LoginController@logout')
     ->name('logout');
