@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Messenger;
 
 use App\Models\Message;
-use App\Http\Requests\MessageController as RequestMessageController;
-use Illuminate\Http\Request;
+use App\Http\Requests\AddMessageController as RequestAddMessageController;
+use App\Http\Requests\DeleteMessageController as RequestDeleteMessageController;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
@@ -36,12 +36,25 @@ class MessageController extends Controller
     /**
      * Сохранение сообщения пользователя
      *
-     * @param RequestMessageController $request
+     * @param RequestAddMessageController $request
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
-    public function addMessage(RequestMessageController $request)
+    public function addMessage(RequestAddMessageController $request)
     {
         $this->create($request->all());
+
+        return redirect(route('home'));
+    }
+
+    /**
+     * Удаление сообщения пользователя
+     *
+     * @param RequestDeleteMessageController $request
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function deleteMessage(RequestDeleteMessageController $request)
+    {
+        $this->delete($request->route('id'));
 
         return redirect(route('home'));
     }
@@ -58,6 +71,16 @@ class MessageController extends Controller
             'text'      =>  $data['text'],
             'user_id'   =>  Auth::user()->id
         ]);
+    }
 
+    /**
+     * Удаление сообщения
+     *
+     * @param int $id
+     * @return mixed
+     */
+    protected function delete(int $id)
+    {
+        return Message::query()->where('id', $id)->delete();
     }
 }

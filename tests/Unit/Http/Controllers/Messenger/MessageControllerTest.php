@@ -81,4 +81,21 @@ class MessageControllerTest extends AbstractTestCase
         $finalCount = Message::query()->count();
         $this->assertEquals($initialCount + 1, $finalCount);
     }
+
+    /**
+     * Пользователь удаляет сообщение
+     */
+    public function testDeleteMessage()
+    {
+        $user = factory(User::class)->create();
+        $message = factory(Message::class)->create(['user_id' => $user->id]);
+
+        $initialCount = Message::query()->count();
+
+        $response = $this->actingAs($user)->post(route('delete-message', ['id' => $message->id]));
+
+        $response->assertRedirect();
+        $finalCount = Message::query()->count();
+        $this->assertEquals($initialCount - 1, $finalCount);
+    }
 }

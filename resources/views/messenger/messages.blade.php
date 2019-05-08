@@ -71,6 +71,12 @@
                     <blockquote>
                         {{ $message->text }}
                     </blockquote>
+                    @if(Auth::check() and Auth::user()->id == $message->user_id)
+                        <a href="{{ route('delete-message', ['id' => $message->id]) }}" onclick="event.preventDefault(); document.getElementById('form-delete-message').submit();" class="btn btn-success">Удалить сообщение</a>
+                        <form id="form-delete-message" action="{{ route('delete-message', ['id' => $message->id]) }}" method="POST" style="display: none">
+                            {{ csrf_field() }}
+                        </form>
+                    @endif
                 </div>
             </div>
         @endforeach

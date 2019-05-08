@@ -2,9 +2,10 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Message;
 use Illuminate\Foundation\Http\FormRequest;
 
-class MessageController extends FormRequest
+class DeleteMessageController extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +14,9 @@ class MessageController extends FormRequest
      */
     public function authorize()
     {
-        return !empty($this->user());
+        $message = Message::find($this->route('id'));
+
+        return $message && $message->user_id === $this->user()->id;
     }
 
     /**
@@ -24,7 +27,7 @@ class MessageController extends FormRequest
     public function rules()
     {
         return [
-            'text'  =>  'required|string'
+            //
         ];
     }
 }

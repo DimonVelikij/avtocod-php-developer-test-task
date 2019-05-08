@@ -22,6 +22,10 @@ Route::get('/home', 'Messenger\MessageController@listMessages')
 Route::post('/add-message', 'Messenger\MessageController@addMessage')
     ->name('add-message');
 
+Route::post('/delete-message/{id}', 'Messenger\MessageController@deleteMessage')
+    ->name('delete-message')
+    ->where('id', '[0-9]+');
+
 Route::get('/login', 'Auth\LoginController@showLoginForm')
     ->name('login');
 
