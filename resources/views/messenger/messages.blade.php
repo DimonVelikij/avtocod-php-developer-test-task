@@ -69,7 +69,7 @@
                         <strong>{{ $message->user->name }}:</strong>
                     </p>
                     <blockquote>
-                        {{ $message->text }}
+                        {!! nl2br(e($message->text)) !!}
                     </blockquote>
                     @if(Auth::check() and Auth::user()->id == $message->user_id)
                         <a href="{{ route('delete-message', ['id' => $message->id]) }}" onclick="event.preventDefault(); document.getElementById('form-delete-message').submit();" class="btn btn-success">Удалить сообщение</a>
