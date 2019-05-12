@@ -62,7 +62,7 @@
         @foreach($messages as $message)
             <div class="row wall-message">
                 <div class="col-md-1 col-xs-2">
-                    <img src="http://lorempixel.com/200/200/people/" alt="" class="img-circle user-avatar" />
+                    @gravatar($message->user->email)
                 </div>
                 <div class="col-md-11 col-xs-10">
                     <p>
