@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+
+    db:
+        build: ./docker/db
+        restart: always
+        ports:
+            - "5432:5432"
+        volumes:
+            - ./postgresql:/var/lib/postgresql/data
+        environment:
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+            POSTGRES_DB: ${DB_DATABASE}
+
+    php:
+        build: ./docker/php
+        ports:
+            - "8080:8080"
+        volumes:
+            - ${APP_PATH_HOST}:${APP_PATH_CONTAINER}
+        working_dir: ${APP_PATH_CONTAINER}
+        links:
+            - db
